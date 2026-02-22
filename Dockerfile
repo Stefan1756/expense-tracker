@@ -29,3 +29,8 @@ RUN chown -R www-data:www-data storage bootstrap/cache
 
 # Render provides PORT; Apache listens on 80 by default, so we map it
 EXPOSE 80
+
+COPY docker/entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
+CMD ["/entrypoint.sh"]
