@@ -61,7 +61,7 @@ class DashboardController extends Controller
 
         $thisMonthByDay = Expense::where('user_id', $user->id)
             ->whereBetween('spent_at', [$thisMonthStart->toDateString(), $thisMonthEnd->toDateString()])
-            ->selectRaw('DAY(spent_at) as d, SUM(amount) as total')
+            ->selectRaw('EXTRACT(DAY FROM spent_at)::int as d, SUM(amount) as total')
             ->groupBy('d')
             ->pluck('total', 'd');
         
